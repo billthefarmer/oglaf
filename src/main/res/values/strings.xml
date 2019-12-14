@@ -3,6 +3,8 @@
 
   <string name="appName">Oglaf</string>
 
+  <string name="previous">Previous</string>
+  <string name="next">Next</string>
   <string name="share">Share</string>
 
 </resources>
