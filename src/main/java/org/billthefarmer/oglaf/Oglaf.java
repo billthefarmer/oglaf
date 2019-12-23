@@ -1,15 +1,20 @@
 package org.billthefarmer.oglaf;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 public class Oglaf extends Activity
 {
-    private boolean dark = true;
-    private ImageView imageView;
+    public static final String URL = "https://oglaf.com";
+    public static final String TEXT_PLAIN = "text/plain";
+
+    private WebView webView;
 
     // Called when the activity is first created.
     @Override
@@ -17,16 +22,62 @@ public class Oglaf extends Activity
     {
         super.onCreate(savedInstanceState);
 
-        if (dark)
-            setTheme(R.style.AppDarkTheme);
-
         setContentView(R.layout.main);
 
-        imageView = findViewById(R.id.oglaf);
+        webView = findViewById(R.id.webview);
+
+        if (webView != null)
+        {
+            // Enable javascript, Oglaf doesn't work unless JavaScript
+            // is enabled
+            WebSettings settings = webView.getSettings();
+            settings.setJavaScriptEnabled(true);
+
+            // Enable zoom
+            settings.setBuiltInZoomControls(true);
+            settings.setDisplayZoomControls(false);
+
+            // Follow links and set title
+            webView.setWebViewClient(new WebViewClient()
+            {
+                // onPageFinished
+                @Override
+                public void onPageFinished(WebView view, String url)
+                {
+                    // Get page title
+                    if (view.getTitle() != null)
+                        setTitle(view.getTitle());
+
+                    if (view.canGoBack())
+                        getActionBar().setDisplayHomeAsUpEnabled(true);
+
+                    else
+                        getActionBar().setDisplayHomeAsUpEnabled(false);
+                }
+            });
+
+            if (savedInstanceState != null)
+                // Restore state
+                webView.restoreState(savedInstanceState);
+
+            else
+                // load Oglaf
+                webView.loadUrl(URL);
+        }
+    }
+
+    // On save instance state
+    @Override
+    public void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
+
+        if (webView != null)
+            // Save state
+            webView.saveState(outState);
     }
 
     // On create option menu
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -37,7 +88,6 @@ public class Oglaf extends Activity
     }
 
     // On options item
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
@@ -46,8 +96,47 @@ public class Oglaf extends Activity
         int id = item.getItemId();
         switch (id)
         {
+            // Home
+        case android.R.id.home:
+            // Back navigation
+            if (webView != null && webView.canGoBack())
+                webView.goBack();
+
+            else
+                finish();
+            break;
+
+            // Share
+        case R.id.action_share:
+            share();
+            break;
+        default:
+            return false;
         }
 
         return true;
+    }
+
+    // On back pressed
+    @Override
+    public void onBackPressed()
+    {
+        // Back navigation
+        if (webView != null && webView.canGoBack())
+            webView.goBack();
+
+        else
+            finish();
+    }
+
+    // share
+    public void share()
+    {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.appName) +
+                        ": " + getTitle().toString());
+        intent.setType(TEXT_PLAIN);
+        intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+        startActivity(Intent.createChooser(intent, null));
     }
 }
