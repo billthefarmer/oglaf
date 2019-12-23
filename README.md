@@ -2,4 +2,4 @@
 
 Oglaf NS(generally)FW.
 
-![Oglaf](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/oglaf/Oglaf.png)
+![Oglaf](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Oglaf.png)
