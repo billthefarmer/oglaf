@@ -149,9 +149,9 @@ public class Oglaf extends Activity
     public void share()
     {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.appName) +
-                        ": " + getTitle().toString());
         intent.setType(TEXT_PLAIN);
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.appName) +
+                        ": " + webView.getTitle());
         intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
         startActivity(Intent.createChooser(intent, null));
     }

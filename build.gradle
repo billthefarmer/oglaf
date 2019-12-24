@@ -42,7 +42,3 @@ android {
         // abortOnError false
     }
 }
-
-dependencies {
-    implementation 'org.jsoup:jsoup:1.12.1'
-}
