@@ -5,8 +5,8 @@
 
   <string name="about">About</string>
   <string name="share">Share</string>
-  <string name="version" formatted="false">Editor <a
-  href="https://github.com/billthefarmer/editor/releases/latest">version
+  <string name="version" formatted="false">Oglaf <a
+  href="https://github.com/billthefarmer/oglaf/releases/latest">version
   %s</a>\nBuilt %s\nCopyright \u00A9 2019 <a
   href="https://github.com/billthefarmer">Bill Farmer</a>\nLicence <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
