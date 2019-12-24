@@ -18,13 +18,23 @@
 package org.billthefarmer.oglaf;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.text.SpannableStringBuilder;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
+
+import java.text.DateFormat;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Oglaf extends Activity
 {
@@ -127,6 +137,12 @@ public class Oglaf extends Activity
         case R.id.action_share:
             share();
             break;
+
+            // About
+        case R.id.action_about:
+            about();
+            break;
+
         default:
             return false;
         }
@@ -155,5 +171,37 @@ public class Oglaf extends Activity
                         ": " + webView.getTitle());
         intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
         startActivity(Intent.createChooser(intent, null));
+    }
+
+    // about
+    private void about()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.about);
+
+        DateFormat dateFormat = DateFormat.getDateTimeInstance();
+        SpannableStringBuilder spannable =
+            new SpannableStringBuilder(getText(R.string.version));
+        Pattern pattern = Pattern.compile("%s");
+        Matcher matcher = pattern.matcher(spannable);
+        if (matcher.find())
+            spannable.replace(matcher.start(), matcher.end(),
+                              BuildConfig.VERSION_NAME);
+        matcher.reset(spannable);
+        if (matcher.find())
+            spannable.replace(matcher.start(), matcher.end(),
+                              dateFormat.format(BuildConfig.BUILT));
+        builder.setMessage(spannable);
+
+        // Add the button
+        builder.setPositiveButton(android.R.string.ok, null);
+
+        // Create the AlertDialog
+        Dialog dialog = builder.show();
+
+        // Set movement method
+        TextView text = dialog.findViewById(android.R.id.message);
+        if (text != null)
+            text.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }
