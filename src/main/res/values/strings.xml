@@ -4,6 +4,7 @@
   <string name="appName">Oglaf</string>
 
   <string name="about">About</string>
+  <string name="refresh">Refresh</string>
   <string name="share">Share</string>
   <string name="version" formatted="false">Oglaf <a
   href="https://github.com/billthefarmer/oglaf/releases/latest">version

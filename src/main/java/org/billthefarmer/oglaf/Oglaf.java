@@ -133,6 +133,11 @@ public class Oglaf extends Activity
                 finish();
             break;
 
+            // Refresh
+        case R.id.action_refresh:
+            refresh();
+            break;
+
             // Share
         case R.id.action_share:
             share();
@@ -160,6 +165,13 @@ public class Oglaf extends Activity
 
         else
             finish();
+    }
+
+    // refresh
+    public void refresh()
+    {
+        if (webView != null)
+            webView.reload();
     }
 
     // share
