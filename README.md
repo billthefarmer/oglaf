@@ -4,5 +4,6 @@ Oglaf NS(generally)FW
 
 ![Oglaf](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Oglaf.png)
 
+* Refresh
 * Share button
 * Back navigation

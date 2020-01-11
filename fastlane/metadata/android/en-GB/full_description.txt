@@ -1,4 +1,5 @@
 NS(generally)FW
 
+* Refresh
 * Share button
 * Back navigation
