@@ -179,8 +179,10 @@ public class Oglaf extends Activity
     {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType(TEXT_PLAIN);
-        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.appName) +
-                        ": " + webView.getTitle());
+        String title =
+            String.format("%s: %s", getString(R.string.appName), getTitle());
+        intent.putExtra(Intent.EXTRA_TITLE, title);
+        intent.putExtra(Intent.EXTRA_SUBJECT, title);
         intent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
         startActivity(Intent.createChooser(intent, null));
     }
