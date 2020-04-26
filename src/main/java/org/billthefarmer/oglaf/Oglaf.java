@@ -191,7 +191,7 @@ public class Oglaf extends Activity
     private void about()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.about);
+        builder.setTitle(R.string.appName);
 
         DateFormat dateFormat = DateFormat.getDateTimeInstance();
         SpannableStringBuilder spannable =
