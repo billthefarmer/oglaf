@@ -42,6 +42,9 @@ captures/
 # Data
 data/
 
+# Keystore properties
+keystore.properties
+
 # IntelliJ
 *.iml
 .idea/workspace.xml
