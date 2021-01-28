@@ -1,4 +1,4 @@
-# ![Oglaf](src/main/res/drawable-hdpi/ic_launcher.png) Oglaf [![Build Status](https://travis-ci.org/billthefarmer/oglaf.svg?branch=master)](https://travis-ci.org/billthefarmer/oglaf) [![Release](https://img.shields.io/github/release/billthefarmer/oglaf.svg?logo=github)](https://github.com/billthefarmer/oglaf/releases)
+# ![Oglaf](src/main/res/drawable-hdpi/ic_launcher.png) Oglaf [![.github/workflows/main.yml](https://github.com/billthefarmer/oglaf/workflows/.github/workflows/main.yml/badge.svg)](https://github.com/billthefarmer/oglaf/actions) [![Release](https://img.shields.io/github/release/billthefarmer/oglaf.svg?logo=github)](https://github.com/billthefarmer/oglaf/releases)
 
 Simple Oglaf viewer &ndash; NS(generally)FW
 
