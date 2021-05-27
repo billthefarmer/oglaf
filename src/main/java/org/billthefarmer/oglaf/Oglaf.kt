@@ -54,12 +54,12 @@ class Oglaf: Activity()
 
         // Enable javascript, Oglaf doesn't work unless JavaScript
         // is enabled
-        val settings  = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
+        val settings  = webView.getSettings()
+        settings.setJavaScriptEnabled(true)
 
         // Enable zoom
-        settings.setBuiltInZoomControls(true);
-        settings.setDisplayZoomControls(false);
+        settings.setBuiltInZoomControls(true)
+        settings.setDisplayZoomControls(false)
 
         // Follow links and set title
         webView.setWebViewClient(object: WebViewClient()
