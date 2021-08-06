@@ -21,11 +21,13 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.text.SpannableStringBuilder
 import android.view.Menu
 import android.view.MenuItem
+import android.webkit.CookieManager;
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
@@ -200,5 +202,18 @@ class Oglaf: Activity()
         // Set movement method
         val text: TextView = dialog.findViewById(android.R.id.message)
         text.setMovementMethod(LinkMovementMethod.getInstance())
+
+        val manager = CookieManager.getInstance()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            manager.removeAllCookies(null)
+            manager.flush()
+        }
+
+        else
+        {
+            @Suppress("DEPRECATION")
+            manager.removeAllCookie()
+        }
     }
 }
