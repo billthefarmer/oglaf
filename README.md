@@ -7,3 +7,4 @@ Simple Oglaf viewer &ndash; NS(generally)FW
 * Refresh
 * Share button
 * Back navigation
+* About dialog (clears cookies)
