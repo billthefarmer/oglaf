@@ -11,22 +11,22 @@ jobs:
       - uses: "actions/checkout@v2"
         name: Checkout
 
-      - name: Build with Gradle
-        run: ./gradlew build
+#      - name: Build with Gradle
+#        run: ./gradlew build
 
-      - name: List files
-        run: find
+#      - name: List files
+#        run: find
 
-      - uses: r0adkll/sign-android-release@v1
-        name: Sign app APK
+#      - uses: r0adkll/sign-android-release@v1
+#        name: Sign app APK
         # ID used to access action output
-        id: sign_app
-        with:
-          releaseDirectory: build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
-          alias: ${{ secrets.ALIAS }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+#        id: sign_app
+#        with:
+#          releaseDirectory: build/outputs/apk/release
+#          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+#          alias: ${{ secrets.ALIAS }}
+#          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+#          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Get the tag version
         id: version
@@ -40,14 +40,14 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: "Version ${{ steps.version.outputs.VERSION }}"
-          body: "![Icon](src/main/res/drawable-xhdpi/ic_launcher.png)"
+          body: "![Icon](src/master/res/drawable-xhdpi/ic_launcher.png)"
 
-      - name: Upload APK
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{steps.sign_app.outputs.signedReleaseFile}}
-          asset_name: "Oglaf-${{ steps.version.outputs.VERSION }}.apk"
-          asset_content_type: application/vnd.android.package-archive
+#      - name: Upload APK
+#        uses: actions/upload-release-asset@v1
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#        with:
+#          upload_url: ${{ steps.create_release.outputs.upload_url }}
+#          asset_path: ${{steps.sign_app.outputs.signedReleaseFile}}
+#          asset_name: "Oglaf-${{ steps.version.outputs.VERSION }}.apk"
+#          asset_content_type: application/vnd.android.package-archive
