@@ -27,11 +27,13 @@ import android.text.method.LinkMovementMethod
 import android.text.SpannableStringBuilder
 import android.view.Menu
 import android.view.MenuItem
-import android.webkit.CookieManager;
+import android.webkit.CookieManager
+import android.webkit.JavascriptInterface
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.TextView
+import android.widget.Toast
 
 import java.text.DateFormat
 
@@ -42,6 +44,13 @@ class Oglaf: Activity()
 {
     val URL = "https://oglaf.com"
     val TEXT_PLAIN = "text/plain"
+
+    val SCRIPT = """
+let image = document.getElementById("strip");
+if (image != null)
+    image.addEventListener("click", (event) => {
+            Toast.postMessage(image.getAttribute("title"));
+        });"""
 
     lateinit var webView: WebView
 
@@ -63,6 +72,8 @@ class Oglaf: Activity()
         settings.setBuiltInZoomControls(true)
         settings.setDisplayZoomControls(false)
 
+        webView.addJavascriptInterface(Message(this), "Toast");
+
         // Follow links and set title
         webView.setWebViewClient(object: WebViewClient()
         {
@@ -71,23 +82,25 @@ class Oglaf: Activity()
             {
                 // Get page title
                 if (view.getTitle() != null)
-                setTitle(view.getTitle())
+                    setTitle(view.getTitle())
 
                 if (view.canGoBack())
-                getActionBar()?.setDisplayHomeAsUpEnabled(true)
+                    getActionBar()?.setDisplayHomeAsUpEnabled(true)
 
                 else
-                getActionBar()?.setDisplayHomeAsUpEnabled(false)
+                    getActionBar()?.setDisplayHomeAsUpEnabled(false)
+
+                view.evaluateJavascript(SCRIPT, null);
             }
         })
 
         if (savedInstanceState != null)
-        // Restore state
-        webView.restoreState(savedInstanceState)
+            // Restore state
+            webView.restoreState(savedInstanceState)
 
         else
-        // load Oglaf
-        webView.loadUrl(URL)
+            // load Oglaf
+            webView.loadUrl(URL)
     }
 
     // On save instance state
@@ -214,6 +227,21 @@ class Oglaf: Activity()
         {
             @Suppress("DEPRECATION")
             manager.removeAllCookie()
+        }
+    }
+
+    private fun showToast(text: String)
+    {
+        val toast = Toast.makeText(this, text, Toast.LENGTH_SHORT)
+        toast.show()
+    }
+
+    class Message(val oglaf: Oglaf)
+    {
+        @JavascriptInterface
+        fun postMessage(message: String)
+        {
+            oglaf.showToast(message)
         }
     }
 }
