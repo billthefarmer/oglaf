@@ -26,10 +26,11 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 */
 android {
     compileSdkVersion 28
+    namespace "org.billthefarmer.oglaf"
 
     defaultConfig {
         applicationId "org.billthefarmer.oglaf"
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 28
         versionName "1.01"
         versionCode 101
