@@ -19,11 +19,11 @@ allprojects {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-
+/*
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
+*/
 android {
     compileSdkVersion 35
     namespace "org.billthefarmer.oglaf"
@@ -37,7 +37,7 @@ android {
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
-
+/*
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -52,7 +52,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
+*/
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_9
         targetCompatibility JavaVersion.VERSION_1_9
