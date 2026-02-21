@@ -5,8 +5,8 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath 'com.android.tools.build:gradle:8.13.2'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.10"
     }
 }
 
@@ -19,25 +19,25 @@ allprojects {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-/*
+
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-*/
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion 35
     namespace "org.billthefarmer.oglaf"
 
     defaultConfig {
         applicationId "org.billthefarmer.oglaf"
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionName "1.01"
-        versionCode 101
+        minSdkVersion 21
+        targetSdkVersion 35
+        versionName "1.02"
+        versionCode 102
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
-/*
+
     signingConfigs {
         release {
             keyAlias keystoreProperties['keyAlias']
@@ -45,22 +45,30 @@ android {
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
+    }
 
-        buildTypes {
-            release {
-                signingConfig signingConfigs.release
-            }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
         }
     }
-*/
+
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_1_9
+        targetCompatibility JavaVersion.VERSION_1_9
+    }
+
+    kotlinOptions {
+        jvmTarget = '9'
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     lintOptions {
-        disable 'SetJavaScriptEnabled', 'OldTargetApi', 'NonConstantResourceId',
-            'ExpiredTargetSdkVersion', 'AndroidGradlePluginVersion'
+        disable 'OldTargetApi', 'AndroidGradlePluginVersion', 'GradleDependency',
+	'SetJavaScriptEnabled'
         // abortOnError false
     }
 }

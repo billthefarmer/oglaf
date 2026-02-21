@@ -158,6 +158,8 @@ if (image != null)
     }
 
     // On back pressed
+    @Suppress("DEPRECATION")
+    @Deprecated("")
     override fun onBackPressed()
     {
         // Back navigation
@@ -217,17 +219,8 @@ if (image != null)
         text.setMovementMethod(LinkMovementMethod.getInstance())
 
         val manager = CookieManager.getInstance()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
-            manager.removeAllCookies(null)
-            manager.flush()
-        }
-
-        else
-        {
-            @Suppress("DEPRECATION")
-            manager.removeAllCookie()
-        }
+        manager.removeAllCookies(null)
+        manager.flush()
     }
 
     private fun showToast(text: String)
